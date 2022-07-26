@@ -31,5 +31,19 @@ WHERE educations.status = 'finished'
 ;
 
 /* QUESTAO 4 */
+SELECT 
+u.id,
+u.name,
+r.name AS role,
+c.name AS company,
+e."startDate"
+FROM users u
+JOIN experiences e
+ON u.id = e."userId"
+JOIN roles r
+ON e."roleId" = r.id
+JOIN companies c
+ON e."companyId" = c.id
+WHERE e."endDate" IS NULL AND u.id = 50;
 
 
