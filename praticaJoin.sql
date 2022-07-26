@@ -15,6 +15,7 @@ ON u.id = tr."recipientId";
 
 /* QUESTAO 3 */
 SELECT 
+users.id,
 users.name,
 courses.name AS course,
 schools.name AS school,
@@ -26,5 +27,9 @@ JOIN courses
 ON educations."courseId" = courses.id
 JOIN schools
 ON educations."schoolId" = schools.id
-WHERE educations.status = 'finished';
+WHERE educations.status = 'finished'
+;
+
+/* QUESTAO 4 */
+
 
