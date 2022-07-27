@@ -2,7 +2,9 @@
 SELECT users.name, cities.name AS city  
 FROM users
 JOIN cities
-ON users."cityId" = cities.id;
+ON users."cityId" = cities.id
+WHERE cities.name = 'Rio de Janeiro';
+;
 
 /* QUESTAO 2 */
 SELECT u.name, t.message 
