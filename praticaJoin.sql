@@ -28,13 +28,12 @@ schools.name AS school,
 educations."endDate"
 FROM users
 JOIN educations
-ON users.id = 30
+ON users.id = educations."userId"
 JOIN courses
 ON educations."courseId" = courses.id
 JOIN schools
 ON educations."schoolId" = schools.id
-WHERE educations.status = 'finished'
-;
+WHERE educations.status = 'finished' AND users.id = 30;
 
 /* QUESTAO 4 */
 SELECT 
