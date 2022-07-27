@@ -7,12 +7,16 @@ WHERE cities.name = 'Rio de Janeiro';
 ;
 
 /* QUESTAO 2 */
-SELECT u.name, t.message 
-FROM users u
-JOIN testimonials t
-ON u.id = t."writerId"
-JOIN testimonials tr
-ON u.id = tr."recipientId";
+SELECT 
+t.id AS id,
+u1.name,
+u2.name,
+t.message 
+FROM testimonials t
+JOIN users u1
+ON  t."writerId" = u1.id
+JOIN users u2
+ON  t."recipientId" = u2.id;
 
 
 /* QUESTAO 3 */
