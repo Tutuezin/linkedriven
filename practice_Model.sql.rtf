@@ -1,0 +1,77 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh14640\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 CREATE DATABASE practice_model\
+\
+CREATE TABLE \'93customers\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93fullName\'94 VARCHAR(50) NOT NULL,\
+\'93cpf\'94 VARCHAR(11) UNIQUE NOT NULL,\
+\'93email\'94 TEXT NOT NULL,\
+\'93password\'94 TEXT NO NULL\
+)\
+\
+CREATE TABLE \'93customerAddresses\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93customerId\'94 INTEGER NOT NULL REFERENCES \'93customers\'94(id),\
+\'93street\'94 TEXT NOT NULL \
+\'93number\'94 INTEGER NOT NULL,\
+\'93complement\'94 TEXT,\
+\'93postalCode\'94 INTEGER NOT NULL,\
+\'93cityId\'94 INTEGER NOT NULL REFERENCES \'93cities\'94(id)\
+)\
+\
+CREATE TABLE \'93cities\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93name\'94 VARCHAR(35) NOT NULL,\
+\'93stateId\'94 INTEGER NOT NULL REFERENCES \'93states\'94(id)\
+)\
+\
+CREATE TABLE \'93states\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93name\'94 VAR CHAR(35) NOT NULL\
+)\
+\
+CREATE TABLE \'93customerPhones\'94 (\
+\'93Id\'94 SERIAL PRIMARY KEY,\
+\'93customerId\'94 INTEGER NOT NULL REFERENCES \'93customers\'94(id),\
+\'93number\'94 INTEGER NOT NULL UNIQUE,\
+\'93type\'94 TEXT NOT NULL\
+)\
+\
+CREATE TABLE \'93bankAccount\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93customerId\'94 INTEGER NOT NULL REFERENCES \'93customers\'94(id),\
+\'93accountNumber\'94 INTEGER NOT NULL UNIQUE,\
+\'93agency\'94 INTEGER NOT NULL,\
+\'93openDate\'94 timestamp NOT NULL DEFAULT NOW(),\
+\'93closeDate\'94 timestamp NOT NULL DEFAULT NOW()\
+)\
+\
+CREATE TABLE \'93transactions\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93bankAccountId\'94 INTEGER NOT NULL REFERENCES \'93bankAccount\'94(id),\
+\'93amount\'94 INTEGER NOT NULL,\
+\'93type\'94 TEXT NOT NULL,\
+\'93time\'94 timestamp NOT NULL DEFAULT NOW(),\
+\'93description\'94 VARCHAR(150),\
+\'93cancelled\'94 BOOLEAN NOT NULL DEFAULT FALSE\
+)\
+\
+CREATE TABLE \'93creditCards\'94 (\
+\'93id\'94 SERIAL PRIMARY KEY,\
+\'93bankAccountId\'94 INTEGER NOT NULL REFERENCES \'93bankAccount\'94(id),\
+\'93name\'94 VARCHAR(35) NOT NULL,\
+\'93number\'94 INTEGER NOT NULL,\
+\'93securityCode\'94 INTEGER NOT NULL,\
+\'93expirationMonth\'94 INTEGER NOT NULL,\
+\'93expirationYear\'94 INTEGER NOT NULL,\
+\'93password\'94 INTEGER NOT NULL,\
+\'93limit\'94 INTEGER NOT NULL\
+)\
+\
+}
