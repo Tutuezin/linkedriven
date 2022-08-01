@@ -16,7 +16,6 @@ CREATE TABLE "public.products" (
 	"userId" integer NOT NULL,
 	"name" varchar(30) NOT NULL,
 	"price" integer NOT NULL,
-	"picture" TEXT NOT NULL,
 	"categoryId" integer NOT NULL,
 	CONSTRAINT "products_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -69,6 +68,28 @@ CREATE TABLE "public.purchaseStatus" (
 
 
 
+CREATE TABLE "public.pictures" (
+	"id" serial NOT NULL,
+	"url" TEXT NOT NULL,
+	"productId" serial NOT NULL,
+	CONSTRAINT "pictures_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
+CREATE TABLE "public.mainPictures" (
+	"id" serial NOT NULL,
+	"url" TEXT NOT NULL,
+	"productId" integer NOT NULL,
+	CONSTRAINT "mainPictures_pk" PRIMARY KEY ("id")
+) WITH (
+  OIDS=FALSE
+);
+
+
+
 
 ALTER TABLE "products" ADD CONSTRAINT "products_fk0" FOREIGN KEY ("userId") REFERENCES "users"("id");
 ALTER TABLE "products" ADD CONSTRAINT "products_fk1" FOREIGN KEY ("categoryId") REFERENCES "productCategory"("id");
@@ -80,6 +101,12 @@ ALTER TABLE "productBag" ADD CONSTRAINT "productBag_fk0" FOREIGN KEY ("productId
 
 ALTER TABLE "purchaseStatus" ADD CONSTRAINT "purchaseStatus_fk0" FOREIGN KEY ("productBagId") REFERENCES "productBag"("id");
 ALTER TABLE "purchaseStatus" ADD CONSTRAINT "purchaseStatus_fk1" FOREIGN KEY ("userAdress") REFERENCES "users"("address");
+
+ALTER TABLE "pictures" ADD CONSTRAINT "pictures_fk0" FOREIGN KEY ("productId") REFERENCES "products"("id");
+
+ALTER TABLE "mainPictures" ADD CONSTRAINT "mainPictures_fk0" FOREIGN KEY ("productId") REFERENCES "products"("id");
+
+
 
 
 
