@@ -10,7 +10,6 @@ CREATE TABLE "public.users" (
 );
 
 
-
 CREATE TABLE "public.products" (
 	"id" serial NOT NULL,
 	"userId" integer NOT NULL,
